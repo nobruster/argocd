@@ -1,0 +1,57 @@
+
+{
+  "schemaName": "orders",
+  "enableColumnBasedNullHandling": false,
+  "dimensionFieldSpecs": [
+    {
+      "name": "order_id",
+      "dataType": "STRING",
+      "fieldType": "DIMENSION",
+      "notNull": false
+    },
+    {
+      "name": "user_key",
+      "dataType": "STRING",
+      "fieldType": "DIMENSION",
+      "notNull": false
+    },
+    {
+      "name": "restaurant_key",
+      "dataType": "STRING",
+      "fieldType": "DIMENSION",
+      "notNull": false
+    },
+    {
+      "name": "driver_key",
+      "dataType": "STRING",
+      "fieldType": "DIMENSION",
+      "notNull": false
+    },
+    {
+      "name": "order_date",
+      "dataType": "STRING",
+      "fieldType": "DIMENSION",
+      "notNull": false
+    },
+    {
+      "name": "total_amount",
+      "dataType": "STRING",
+      "fieldType": "DIMENSION",
+      "notNull": false
+    },
+    {
+      "name": "payment_id",
+      "dataType": "STRING",
+      "fieldType": "DIMENSION",
+      "notNull": false
+    }
+  ],
+  "dateTimeFieldSpecs": [
+    {
+      "name": "dt_current_timestamp",
+      "dataType": "TIMESTAMP",
+      "format": "1:MILLISECONDS:EPOCH",
+      "granularity": "1:MILLISECONDS"
+    }
+  ]
+}

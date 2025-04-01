@@ -1,0 +1,106 @@
+{
+    "schemaName": "fullorderdetails",
+    "enableColumnBasedNullHandling": false,
+    "dimensionFieldSpecs": [
+      {
+        "name": "user_id",
+        "dataType": "INT",
+        "fieldType": "DIMENSION",
+        "notNull": false
+      },
+      {
+        "name": "user_first_name",
+        "dataType": "STRING",
+        "fieldType": "DIMENSION",
+        "notNull": false
+      },
+      {
+        "name": "user_last_name",
+        "dataType": "STRING",
+        "fieldType": "DIMENSION",
+        "notNull": false
+      },
+      {
+        "name": "user_country",
+        "dataType": "STRING",
+        "fieldType": "DIMENSION",
+        "notNull": false
+      },
+      {
+        "name": "driver_id",
+        "dataType": "INT",
+        "fieldType": "DIMENSION",
+        "notNull": false
+      },
+      {
+        "name": "driver_first_name",
+        "dataType": "STRING",
+        "fieldType": "DIMENSION",
+        "notNull": false
+      },
+      {
+        "name": "driver_last_name",
+        "dataType": "STRING",
+        "fieldType": "DIMENSION",
+        "notNull": false
+      },
+      {
+        "name": "restaurant_id",
+        "dataType": "INT",
+        "fieldType": "DIMENSION",
+        "notNull": false
+      },
+      {
+        "name": "restaurant_name",
+        "dataType": "STRING",
+        "fieldType": "DIMENSION",
+        "notNull": false
+      },
+      {
+        "name": "restaurant_city",
+        "dataType": "STRING",
+        "fieldType": "DIMENSION",
+        "notNull": false
+      },
+      {
+        "name": "restaurant_country",
+        "dataType": "STRING",
+        "fieldType": "DIMENSION",
+        "notNull": false
+      },
+      {
+        "name": "order_id",
+        "dataType": "INT",
+        "fieldType": "DIMENSION",
+        "notNull": false
+      }
+    ],
+    "metricFieldSpecs": [
+      {
+        "name": "average_rating",
+        "dataType": "LONG",
+        "fieldType": "METRIC",
+        "notNull": false
+      },
+      {
+        "name": "rating",
+        "dataType": "LONG",
+        "fieldType": "METRIC",
+        "notNull": false
+      },
+      {
+        "name": "total_amount",
+        "dataType": "DOUBLE",
+        "fieldType": "METRIC",
+        "notNull": false
+      }
+    ],
+    "dateTimeFieldSpecs": [
+      {
+        "name": "order_date",
+        "dataType": "TIMESTAMP",
+        "format": "1:MILLISECONDS:EPOCH",
+        "granularity": "1:MILLISECONDS"
+      }
+    ]
+  }

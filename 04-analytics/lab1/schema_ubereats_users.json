@@ -1,0 +1,74 @@
+{
+    "schemaName": "users",
+    "enableColumnBasedNullHandling": false,
+    "dimensionFieldSpecs": [
+      {
+        "name": "user_id",
+        "dataType": "INT",
+        "fieldType": "DIMENSION",
+        "notNull": false
+      },
+      {
+        "name": "uuid",
+        "dataType": "STRING",
+        "fieldType": "DIMENSION",
+        "notNull": false
+      },
+      {
+        "name": "first_name",
+        "dataType": "STRING",
+        "fieldType": "DIMENSION",
+        "notNull": false
+      },
+      {
+        "name": "last_name",
+        "dataType": "STRING",
+        "fieldType": "DIMENSION",
+        "notNull": false
+      },
+      {
+        "name": "cpf",
+        "dataType": "STRING",
+        "fieldType": "DIMENSION",
+        "notNull": false
+      },
+      {
+        "name": "birthday",
+        "dataType": "STRING",
+        "fieldType": "DIMENSION",
+        "notNull": false
+      },
+      {
+        "name": "company_name",
+        "dataType": "STRING",
+        "fieldType": "DIMENSION",
+        "notNull": false
+      },
+      {
+        "name": "job",
+        "dataType": "STRING",
+        "fieldType": "DIMENSION",
+        "notNull": false
+      },
+      {
+        "name": "phone_number",
+        "dataType": "STRING",
+        "fieldType": "DIMENSION",
+        "notNull": false
+      },
+      {
+        "name": "country",
+        "dataType": "JSON",
+        "fieldType": "DIMENSION",
+        "notNull": false
+      }
+    ],
+    "dateTimeFieldSpecs": [
+      {
+        "name": "dt_current_timestamp",
+        "dataType": "TIMESTAMP",
+        "format": "1:MILLISECONDS:EPOCH",
+        "granularity": "1:MILLISECONDS"
+      }
+    ]
+  }

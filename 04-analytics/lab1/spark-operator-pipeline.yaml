@@ -1,0 +1,45 @@
+apiVersion: sparkoperator.k8s.io/v1beta2
+kind: SparkApplication
+metadata:
+  name: spark-operator-pipeline
+  namespace: processing
+spec:
+  type: Python
+  pythonVersion: "3"
+  mode: cluster
+  image: grudtnerv/sparkbdk:1.0.1
+  imagePullPolicy: IfNotPresent
+  mainApplicationFile: "s3a://landing/spark-pipeline-bronze-lento.py"
+  arguments:
+    - "100"
+  sparkConf:
+    spark.hadoop.fs.s3a.access.key: "minio"
+    spark.hadoop.fs.s3a.secret.key: "minio123"
+    spark.hadoop.fs.s3a.endpoint: "http://datalake-hl.deepstore.svc.cluster.local:9000"
+    spark.hadoop.fs.s3a.path.style.access: "true"
+    spark.hadoop.fs.s3a.connection.ssl.enabled: "false"
+    spark.metrics.conf: "/etc/metrics/conf/metrics.properties"
+  sparkVersion: 3.4.3
+  restartPolicy:
+    type: Never
+  timeToLiveSeconds: 30
+  driver:
+    cores: 1
+    memory: 500m
+    serviceAccount: spark-operator-spark
+  executor:
+    instances: 2
+    cores: 1
+    memory: 1024m
+  dynamicAllocation:
+    enabled: false
+    initialExecutors: 1
+    maxExecutors: 1
+    minExecutors: 1
+  monitoring:
+    exposeDriverMetrics: true
+    exposeExecutorMetrics: true
+    prometheus:
+      jmxExporterJar: /prometheus/jmx_prometheus_javaagent-0.11.0.jar
+      port: 8090
+  

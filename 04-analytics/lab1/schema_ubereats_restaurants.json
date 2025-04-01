@@ -1,0 +1,94 @@
+{
+  "schemaName": "restaurants",
+  "enableColumnBasedNullHandling": false,
+  "dimensionFieldSpecs": [
+    {
+      "name": "restaurant_id",
+      "dataType": "INT",
+      "fieldType": "DIMENSION",
+      "notNull": false
+    },
+    {
+      "name": "uuid",
+      "dataType": "STRING",
+      "fieldType": "DIMENSION",
+      "notNull": false
+    },
+    {
+      "name": "name",
+      "dataType": "STRING",
+      "fieldType": "DIMENSION",
+      "notNull": false
+    },
+    {
+      "name": "address",
+      "dataType": "STRING",
+      "fieldType": "DIMENSION",
+      "notNull": false
+    },
+    {
+      "name": "city",
+      "dataType": "STRING",
+      "fieldType": "DIMENSION",
+      "notNull": false
+    },
+    {
+      "name": "country",
+      "dataType": "STRING",
+      "fieldType": "DIMENSION",
+      "notNull": false
+    },
+    {
+      "name": "phone_number",
+      "dataType": "STRING",
+      "fieldType": "DIMENSION",
+      "notNull": false
+    },
+    {
+      "name": "cuisine_type",
+      "dataType": "STRING",
+      "fieldType": "DIMENSION",
+      "notNull": false
+    },
+    {
+      "name": "opening_time",
+      "dataType": "STRING",
+      "fieldType": "DIMENSION",
+      "notNull": false
+    },
+    {
+      "name": "closing_time",
+      "dataType": "STRING",
+      "fieldType": "DIMENSION",
+      "notNull": false
+    },
+    {
+      "name": "cnpj",
+      "dataType": "STRING",
+      "fieldType": "DIMENSION",
+      "notNull": false
+    }
+  ],
+  "metricFieldSpecs": [
+    {
+      "name": "average_rating",
+      "dataType": "LONG",
+      "fieldType": "METRIC",
+      "notNull": false
+    },
+    {
+      "name": "num_reviews",
+      "dataType": "LONG",
+      "fieldType": "METRIC",
+      "notNull": false
+    }
+  ],
+  "dateTimeFieldSpecs": [
+    {
+      "name": "dt_current_timestamp",
+      "dataType": "TIMESTAMP",
+      "format": "1:MILLISECONDS:EPOCH",
+      "granularity": "1:MILLISECONDS"
+    }
+  ]
+}

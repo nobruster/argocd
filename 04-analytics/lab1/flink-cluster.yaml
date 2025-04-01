@@ -1,0 +1,78 @@
+apiVersion: flink.apache.org/v1beta1
+kind: FlinkDeployment
+metadata:
+  name: flink-cluster-bdk-dev
+  namespace: processing
+spec:
+  image: grudtnerv/flinkbdk:1.0.9 
+  flinkVersion: v1_19
+  flinkConfiguration:
+    taskmanager.numberOfTaskSlots: "1"
+    jobmanager.memory.process.size: "1g"
+    kubernetes.jobmanager.memory.limit-factor: "1"
+    kubernetes.jobmanager.cpu.amount: "1"
+    kubernetes.jobmanager.cpu.limit-factor: "1"
+    taskmanager.memory.process.size: "1g"
+    kubernetes.taskmanager.memory.limit-factor: "1"
+    kubernetes.taskmanager.cpu.amount: "1"
+    kubernetes.taskmanager.cpu.limit-factor: "1"
+    parallelism.default: "1"
+    # state.savepoints.dir: s3a://flink/savepoints
+    # state.checkpoints.dir: s3a://flink/checkpoints
+    # state.backend.type: filesystem
+    # high-availability.type: kubernetes
+    # high-availability.storageDir: s3a://flink/ha
+    # s3.access-key: minio
+    # s3.secret-key: minio123
+    # s3.endpoint: http://myminio-hl.deepstore.svc.cluster.local:9000
+    # s3.path-style-access: "true" 
+    # s3.plugin: s3-fs-hadoop
+    rest.flamegraph.enabled: "true"
+    rest.enabled: "true"
+    web.cancel.enable: "true"
+    rest.profiling.enabled: "true"
+    taskmanager.heartbeat.interval: "10000"
+    taskmanager.heartbeat.timeout: "50000"
+    metrics.reporter.prom.factory.class: org.apache.flink.metrics.prometheus.PrometheusReporterFactory
+    metrics.reporter.prom.port: "9249"
+    metrics.reporter.prom.jobmanager.class: org.apache.flink.metrics.prometheus.PrometheusReporter
+    metrics.reporter.prom.taskmanager.class: org.apache.flink.metrics.prometheus.PrometheusReporter
+  serviceAccount: flink
+  jobManager:
+    resource:
+      memory: "1024m"
+      cpu: 1
+  taskManager:
+    resource:
+      memory: "1024m"
+      cpu: 1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-jobmanager
+  namespace: processing
+spec:
+  selector:
+    app: flink-cluster
+    component: jobmanager
+  ports:
+    - name: metrics
+      port: 9249
+      targetPort: 9249
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-taskmanager
+  namespace: processing
+spec:
+  selector:
+    app: flink-cluster
+    component: taskmanager
+  ports:
+    - name: metrics
+      port: 9249
+      targetPort: 9249
+  type: ClusterIP

@@ -1,0 +1,5663 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "description": "Trino deploy on k8s, collect jmx to monitor worker and master",
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 26,
+  "links": [],
+  "panels": [
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 3,
+      "panels": [],
+      "title": "JVM Memory",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 1
+      },
+      "id": 1,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "jvm_memory_bytes_used{job=\"processing/trino\"}",
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{area}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "jvm memory(used)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 1
+      },
+      "id": 2,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "jvm_memory_bytes_committed{job=\"processing/trino\"}",
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{area}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "jvm memory(committed)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 2,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 9
+      },
+      "id": 4,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "jvm_memory_pool_bytes_used{job=\"processing/trino\"}",
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{pool}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "jvm memory pool(used)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 9
+      },
+      "id": 5,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "jvm_memory_pool_bytes_committed{job=\"processing/trino\"}",
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{pool}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "jvm memory pool(committed)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 17
+      },
+      "id": 10,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "jvm_buffer_pool_used_bytes{job=\"processing/trino\"}",
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{pool}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "jvm buffer pool(used)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 17
+      },
+      "id": 11,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "jvm_buffer_pool_capacity_bytes{job=\"processing/trino\"}",
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{pool}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "jvm buffer pool(capacity)",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 25
+      },
+      "id": 12,
+      "panels": [],
+      "title": "JVM Thread",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 2,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 0,
+        "y": 26
+      },
+      "id": 13,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "jvm_threads_current{job=\"processing/trino\"}",
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": " Number of threads",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 2,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 8,
+        "y": 26
+      },
+      "id": 19,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "jvm_threads_deadlocked{job=\"processing/trino\"}",
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Number of threads in deadlock",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 2,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 16,
+        "y": 26
+      },
+      "id": 15,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "jvm_threads_state{job=\"processing/trino\"}",
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{state}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Thread state distribution",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 34
+      },
+      "id": 20,
+      "panels": [],
+      "title": "OperatingSystem",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 35
+      },
+      "id": 28,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "java_lang_OperatingSystem_OpenFileDescriptorCount{job=\"processing/trino\"}",
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Open File Descriptor",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 2,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 35
+      },
+      "id": 21,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "increase(java_lang_OperatingSystem_ProcessCpuTime{job=\"processing/trino\"}[1m]) / (java_lang_OperatingSystem_AvailableProcessors{job=\"processing/trino\"} * 60 * 1000000000)",
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Average CPU Usage (1min)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 2,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 43
+      },
+      "id": 22,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "java_lang_OperatingSystem_CpuLoad{job=\"processing/trino\"}",
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Cpu Load",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 2,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 43
+      },
+      "id": 23,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "java_lang_OperatingSystem_ProcessCpuLoad{job=\"processing/trino\"}",
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Cpu Load(Process)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 2,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 51
+      },
+      "id": 24,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "java_lang_OperatingSystem_SystemCpuLoad{job=\"processing/trino\"}",
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Cpu Load(System)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 51
+      },
+      "id": 31,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "java_lang_OperatingSystem_SystemLoadAverage{job=\"processing/trino\"}",
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "System Load Average",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 59
+      },
+      "id": 30,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "java_lang_OperatingSystem_FreeMemorySize{job=\"processing/trino\"}",
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Free Memory Size",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 59
+      },
+      "id": 27,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "java_lang_OperatingSystem_FreePhysicalMemorySize{job=\"processing/trino\"}",
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Free Physical Memory",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 67
+      },
+      "id": 42,
+      "panels": [],
+      "title": "SqlTaskManager",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 0,
+        "y": 68
+      },
+      "id": 43,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "increase(trino_execution_SqlTaskManager_InputDataSize_TotalCount{job=\"processing/trino\"}[1m])",
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Volume Input Data SQL Tasks (1min)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 8,
+        "y": 68
+      },
+      "id": 44,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "increase(trino_execution_SqlTaskManager_OutputDataSize_TotalCount{job=\"processing/trino\"}[1m])",
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Amount of Data produced by Tasks SQL (1min)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 16,
+        "y": 68
+      },
+      "id": 45,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "increase(trino_execution_SqlTaskManager_FailedTasks_TotalCount{job=\"processing/trino\"}[1m])",
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "SQL Tasks failures (1min)",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 76
+      },
+      "id": 46,
+      "panels": [],
+      "title": "TaskExecutor",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 77
+      },
+      "id": 49,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "editorMode": "code",
+          "expr": "trino_execution_RemoteTaskFactory_Executor_PoolSize{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "B"
+        }
+      ],
+      "title": "Number of threads in the thread pool",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 77
+      },
+      "id": 53,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "trino_execution_RemoteTaskFactory_Executor_TaskCount{job=\"processing/trino\"}",
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Number of tasks in the TaskExecutor",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 85
+      },
+      "id": 63,
+      "panels": [],
+      "title": "ThriftMetastoreStats(One Minute)",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 8,
+        "x": 0,
+        "y": 86
+      },
+      "id": 105,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_GetAllDatabases_TotalFailures_OneMinute_Count{job=\"processing/trino\"}",
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-GetAllDatabases",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_GetDatabase_TotalFailures_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-GetDatabase",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_GetAllTables_TotalFailures_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-GetAllTables",
+          "range": true,
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_GetTablesWithParameter_TotalFailures_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-GetTablesWithParameter",
+          "range": true,
+          "refId": "D"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_GetAllViews_TotalFailures_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-GetAllViews",
+          "range": true,
+          "refId": "E"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_GetTable_TotalFailures_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-GetTable",
+          "range": true,
+          "refId": "F"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_GetFields_TotalFailures_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-GetFields",
+          "range": true,
+          "refId": "G"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_GetTableColumnStatistics_TotalFailures_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-GetTableColumnStatistics",
+          "range": true,
+          "refId": "H"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_SetTableColumnStatistics_TotalFailures_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-SetTableColumnStatistics",
+          "range": true,
+          "refId": "I"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_DeleteTableColumnStatistics_TotalFailures_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-DeleteTableColumnStatistics",
+          "range": true,
+          "refId": "J"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_GetPartitionColumnStatistics_TotalFailures_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-GetPartitionColumnStatistics",
+          "range": true,
+          "refId": "K"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_SetPartitionColumnStatistics_TotalFailures_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-SetPartitionColumnStatistics",
+          "range": true,
+          "refId": "L"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_DeletePartitionColumnStatistics_TotalFailures_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-DeletePartitionColumnStatistics",
+          "range": true,
+          "refId": "M"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_GetPartitionNames_TotalFailures_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-GetPartitionNames",
+          "range": true,
+          "refId": "N"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_GetPartitionNamesByParts_TotalFailures_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-GetPartitionNamesByParts",
+          "range": true,
+          "refId": "O"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_GetPartition_TotalFailures_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-GetPartition",
+          "range": true,
+          "refId": "P"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_GetPartitionsByNames_TotalFailures_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-GetPartitionsByNames",
+          "range": true,
+          "refId": "Q"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_CreateDatabase_TotalFailures_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-CreateDatabase",
+          "range": true,
+          "refId": "R"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_DropDatabase_TotalFailures_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-DropDatabase",
+          "range": true,
+          "refId": "S"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_AlterDatabase_TotalFailures_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-AlterDatabase",
+          "range": true,
+          "refId": "T"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_CreateTable_TotalFailures_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-CreateTable",
+          "range": true,
+          "refId": "U"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_DropTable_TotalFailures_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-DropTable",
+          "range": true,
+          "refId": "V"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_AlterTable_TotalFailures_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-AlterTable",
+          "range": true,
+          "refId": "W"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_AddPartitions_TotalFailures_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-AddPartitions",
+          "range": true,
+          "refId": "X"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_DropPartition_TotalFailures_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-DropPartition",
+          "range": true,
+          "refId": "Y"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_AlterPartition_TotalFailures_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-AlterPartition",
+          "range": true,
+          "refId": "Z"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_AcquireLock_TotalFailures_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-AcquireLock",
+          "range": true,
+          "refId": "AD"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_CheckLock_TotalFailures_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-CheckLock",
+          "range": true,
+          "refId": "AE"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_Unlock_TotalFailures_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-Unlock",
+          "range": true,
+          "refId": "AF"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_AlterPartitions_TotalFailures_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-AlterPartitions",
+          "range": true,
+          "refId": "AG"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_AddDynamicPartitions_TotalFailures_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-AddDynamicPartitions",
+          "range": true,
+          "refId": "AH"
+        }
+      ],
+      "title": "Number of failed calls (io_trino_plugin)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 8,
+        "x": 8,
+        "y": 86
+      },
+      "id": 106,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_GetAllDatabases_ThriftExceptions_OneMinute_Count{job=\"processing/trino\"}",
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-GetAllDatabases",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_GetDatabase_ThriftExceptions_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-GetDatabase",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_GetAllTables_ThriftExceptions_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-GetAllTables",
+          "range": true,
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_GetTablesWithParameter_ThriftExceptions_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-GetTablesWithParameter",
+          "range": true,
+          "refId": "D"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_GetAllViews_ThriftExceptions_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-GetAllViews",
+          "range": true,
+          "refId": "E"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_GetTable_ThriftExceptions_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-GetTable",
+          "range": true,
+          "refId": "F"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_GetFields_ThriftExceptions_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-GetFields",
+          "range": true,
+          "refId": "G"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_GetTableColumnStatistics_ThriftExceptions_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-GetTableColumnStatistics",
+          "range": true,
+          "refId": "H"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_SetTableColumnStatistics_ThriftExceptions_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-SetTableColumnStatistics",
+          "range": true,
+          "refId": "I"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_DeleteTableColumnStatistics_ThriftExceptions_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-DeleteTableColumnStatistics",
+          "range": true,
+          "refId": "J"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_GetPartitionColumnStatistics_ThriftExceptions_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-GetPartitionColumnStatistics",
+          "range": true,
+          "refId": "K"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_SetPartitionColumnStatistics_ThriftExceptions_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-SetPartitionColumnStatistics",
+          "range": true,
+          "refId": "L"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_DeletePartitionColumnStatistics_ThriftExceptions_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-DeletePartitionColumnStatistics",
+          "range": true,
+          "refId": "M"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_GetPartitionNames_ThriftExceptions_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-GetPartitionNames",
+          "range": true,
+          "refId": "N"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_GetPartitionNamesByParts_ThriftExceptions_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-GetPartitionNamesByParts",
+          "range": true,
+          "refId": "O"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_GetPartition_ThriftExceptions_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-GetPartition",
+          "range": true,
+          "refId": "P"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_GetPartitionsByNames_ThriftExceptions_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-GetPartitionsByNames",
+          "range": true,
+          "refId": "Q"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_CreateDatabase_ThriftExceptions_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-CreateDatabase",
+          "range": true,
+          "refId": "R"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_DropDatabase_ThriftExceptions_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-DropDatabase",
+          "range": true,
+          "refId": "S"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_AlterDatabase_ThriftExceptions_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-AlterDatabase",
+          "range": true,
+          "refId": "T"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_CreateTable_ThriftExceptions_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-CreateTable",
+          "range": true,
+          "refId": "U"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_DropTable_ThriftExceptions_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-DropTable",
+          "range": true,
+          "refId": "V"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_AlterTable_ThriftExceptions_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-AlterTable",
+          "range": true,
+          "refId": "W"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_AddPartitions_ThriftExceptions_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-AddPartitions",
+          "range": true,
+          "refId": "X"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_DropPartition_ThriftExceptions_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-DropPartition",
+          "range": true,
+          "refId": "Y"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_AlterPartition_ThriftExceptions_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-AlterPartition",
+          "range": true,
+          "refId": "Z"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_AcquireLock_ThriftExceptions_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-AcquireLock",
+          "range": true,
+          "refId": "AD"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_CheckLock_ThriftExceptions_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-CheckLock",
+          "range": true,
+          "refId": "AE"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_Unlock_ThriftExceptions_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-Unlock",
+          "range": true,
+          "refId": "AF"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_AlterPartitions_ThriftExceptions_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-AlterPartitions",
+          "range": true,
+          "refId": "AG"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_AddDynamicPartitions_ThriftExceptions_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-AddDynamicPartitions",
+          "range": true,
+          "refId": "AH"
+        }
+      ],
+      "title": " Number of failed calls (ThriftExceptions) (io_trino_plugin)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 8,
+        "x": 16,
+        "y": 86
+      },
+      "id": 107,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_GetAllDatabases_MetastoreExceptions_OneMinute_Count{job=\"processing/trino\"}",
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-GetAllDatabases",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_GetDatabase_MetastoreExceptions_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-GetDatabase",
+          "range": true,
+          "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_GetAllTables_MetastoreExceptions_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-GetAllTables",
+          "range": true,
+          "refId": "C"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_GetTablesWithParameter_MetastoreExceptions_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-GetTablesWithParameter",
+          "range": true,
+          "refId": "D"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_GetAllViews_MetastoreExceptions_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-GetAllViews",
+          "range": true,
+          "refId": "E"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_GetTable_MetastoreExceptions_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-GetTable",
+          "range": true,
+          "refId": "F"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_GetFields_MetastoreExceptions_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-GetFields",
+          "range": true,
+          "refId": "G"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_GetTableColumnStatistics_MetastoreExceptions_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-GetTableColumnStatistics",
+          "range": true,
+          "refId": "H"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_SetTableColumnStatistics_MetastoreExceptions_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-SetTableColumnStatistics",
+          "range": true,
+          "refId": "I"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_DeleteTableColumnStatistics_MetastoreExceptions_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-DeleteTableColumnStatistics",
+          "range": true,
+          "refId": "J"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_GetPartitionColumnStatistics_MetastoreExceptions_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-GetPartitionColumnStatistics",
+          "range": true,
+          "refId": "K"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_SetPartitionColumnStatistics_MetastoreExceptions_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-SetPartitionColumnStatistics",
+          "range": true,
+          "refId": "L"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_DeletePartitionColumnStatistics_MetastoreExceptions_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-DeletePartitionColumnStatistics",
+          "range": true,
+          "refId": "M"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_GetPartitionNames_MetastoreExceptions_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-GetPartitionNames",
+          "range": true,
+          "refId": "N"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_GetPartitionNamesByParts_MetastoreExceptions_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-GetPartitionNamesByParts",
+          "range": true,
+          "refId": "O"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_GetPartition_MetastoreExceptions_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-GetPartition",
+          "range": true,
+          "refId": "P"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_GetPartitionsByNames_MetastoreExceptions_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-GetPartitionsByNames",
+          "range": true,
+          "refId": "Q"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_CreateDatabase_MetastoreExceptions_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-CreateDatabase",
+          "range": true,
+          "refId": "R"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_DropDatabase_MetastoreExceptions_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-DropDatabase",
+          "range": true,
+          "refId": "S"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_AlterDatabase_MetastoreExceptions_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-AlterDatabase",
+          "range": true,
+          "refId": "T"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_CreateTable_MetastoreExceptions_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-CreateTable",
+          "range": true,
+          "refId": "U"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_DropTable_MetastoreExceptions_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-DropTable",
+          "range": true,
+          "refId": "V"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_AlterTable_MetastoreExceptions_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-AlterTable",
+          "range": true,
+          "refId": "W"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_AddPartitions_MetastoreExceptions_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-AddPartitions",
+          "range": true,
+          "refId": "X"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_DropPartition_MetastoreExceptions_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-DropPartition",
+          "range": true,
+          "refId": "Y"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_AlterPartition_MetastoreExceptions_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-AlterPartition",
+          "range": true,
+          "refId": "Z"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_AcquireLock_MetastoreExceptions_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-AcquireLock",
+          "range": true,
+          "refId": "AD"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_CheckLock_MetastoreExceptions_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-CheckLock",
+          "range": true,
+          "refId": "AE"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_Unlock_MetastoreExceptions_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-Unlock",
+          "range": true,
+          "refId": "AF"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_AlterPartitions_MetastoreExceptions_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-AlterPartitions",
+          "range": true,
+          "refId": "AG"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_AddDynamicPartitions_MetastoreExceptions_OneMinute_Count{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-AddDynamicPartitions",
+          "range": true,
+          "refId": "AH"
+        }
+      ],
+      "title": "Number of failed calls (MetastoreExceptions) (io_trino_plugin)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {},
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ms"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 0,
+        "y": 96
+      },
+      "id": 132,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_CreateTable_Time_OneMinute_Avg{job=\"processing/trino\"}",
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-io_trino_plugin",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_CreateTable_Time_OneMinute_Avg{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-plugin",
+          "range": true,
+          "refId": "B"
+        }
+      ],
+      "title": "The average time taken by CreateTable.",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ms"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 6,
+        "y": 96
+      },
+      "id": 65,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_GetAllDatabases_Time_OneMinute_Max{job=\"processing/trino\"}",
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-io_trino_plugin",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_GetAllDatabases_Time_OneMinute_Max{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-plugin",
+          "range": true,
+          "refId": "B"
+        }
+      ],
+      "title": "Maximum time taken by GetAllDatabases",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ms"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 12,
+        "y": 96
+      },
+      "id": 70,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_GetDatabase_Time_OneMinute_Avg{job=\"processing/trino\"}",
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-io_trino_plugin",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_GetDatabase_Time_OneMinute_Avg{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-plugin",
+          "range": true,
+          "refId": "B"
+        }
+      ],
+      "title": "Average time taken by GetDatabase",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ms"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 18,
+        "y": 96
+      },
+      "id": 71,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_GetDatabase_Time_OneMinute_Max{job=\"processing/trino\"}",
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-io_trino_plugin",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_GetDatabase_Time_OneMinute_Max{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-plugin",
+          "range": true,
+          "refId": "B"
+        }
+      ],
+      "title": "Maximum time taken by GetDatabase",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {},
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ms"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 0,
+        "y": 104
+      },
+      "id": 136,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_AlterTable_Time_OneMinute_Avg{job=\"processing/trino\"}",
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-io_trino_plugin",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_AlterTable_Time_OneMinute_Avg{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-plugin",
+          "range": true,
+          "refId": "B"
+        }
+      ],
+      "title": "The average time taken by AlterTable.",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {},
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ms"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 6,
+        "y": 104
+      },
+      "id": 133,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_CreateTable_Time_OneMinute_Max{job=\"processing/trino\"}",
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-io_trino_plugin",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_CreateTable_Time_OneMinute_Max{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-plugin",
+          "range": true,
+          "refId": "B"
+        }
+      ],
+      "title": "The maximum time taken by CreateTable.",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ms"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 12,
+        "y": 104
+      },
+      "id": 90,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_GetTable_Time_OneMinute_Avg{job=\"processing/trino\"}",
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-io_trino_plugin",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_GetTable_Time_OneMinute_Avg{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-plugin",
+          "range": true,
+          "refId": "B"
+        }
+      ],
+      "title": "Average time taken by GetTable",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ms"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 18,
+        "y": 104
+      },
+      "id": 91,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_GetTable_Time_OneMinute_Max{job=\"processing/trino\"}",
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-io_trino_plugin",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_GetTable_Time_OneMinute_Max{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-plugin",
+          "range": true,
+          "refId": "B"
+        }
+      ],
+      "title": "Maximum time taken by GetTable",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {},
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ms"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 0,
+        "y": 112
+      },
+      "id": 144,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_AcquireLock_Time_OneMinute_Avg{job=\"processing/trino\"}",
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-io_trino_plugin",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_AcquireLock_Time_OneMinute_Avg{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-plugin",
+          "range": true,
+          "refId": "B"
+        }
+      ],
+      "title": "The average time taken by AcquireLock.",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {},
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ms"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 6,
+        "y": 112
+      },
+      "id": 137,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_AlterTable_Time_OneMinute_Max{job=\"processing/trino\"}",
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-io_trino_plugin",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_AlterTable_Time_OneMinute_Max{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-plugin",
+          "range": true,
+          "refId": "B"
+        }
+      ],
+      "title": "The maximum time taken by AlterTable.",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {},
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ms"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 12,
+        "y": 112
+      },
+      "id": 145,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_AcquireLock_Time_OneMinute_Max{job=\"processing/trino\"}",
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-io_trino_plugin",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_AcquireLock_Time_OneMinute_Max{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-plugin",
+          "range": true,
+          "refId": "B"
+        }
+      ],
+      "title": "The maximum time taken by AcquireLock.",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {},
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ms"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 6,
+        "x": 18,
+        "y": 112
+      },
+      "id": 149,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_Unlock_Time_OneMinute_Max{job=\"processing/trino\"}",
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-io_trino_plugin",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "trino_plugin_hive_metastore_thrift_ThriftHiveMetastore_Unlock_Time_OneMinute_Max{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-plugin",
+          "range": true,
+          "refId": "B"
+        }
+      ],
+      "title": "The maximum time taken by Unlock.",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 120
+      },
+      "id": 183,
+      "panels": [],
+      "title": "FileFormatDataSourceStats(One Minute)",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "bytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 121
+      },
+      "id": 184,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_FileFormatDataSourceStats_ReadBytes_OneMinute_Total{job=\"processing/trino\"}",
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-io_trino_plugin",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "trino_plugin_hive_FileFormatDataSourceStats_ReadBytes_OneMinute_Total{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-plugin",
+          "range": true,
+          "refId": "B"
+        }
+      ],
+      "title": "ReadBytes",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ms"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 121
+      },
+      "id": 186,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_FileFormatDataSourceStats_100KBto1MB_OneMinute_Avg{job=\"processing/trino\"}",
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-io_trino_plugin",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "trino_plugin_hive_FileFormatDataSourceStats_100KBto1MB_OneMinute_Avg{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-plugin",
+          "range": true,
+          "refId": "B"
+        }
+      ],
+      "title": "The average read time from 100KB to 1MB.",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ms"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 0,
+        "y": 129
+      },
+      "id": 185,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_FileFormatDataSourceStats_0Bto100KB_OneMinute_Avg{job=\"processing/trino\"}",
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-io_trino_plugin",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "trino_plugin_hive_FileFormatDataSourceStats_0Bto100KB_OneMinute_Avg{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-plugin",
+          "range": true,
+          "refId": "B"
+        }
+      ],
+      "title": "The average read time from 0B to 100KB.",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ms"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 8,
+        "y": 129
+      },
+      "id": 200,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_FileFormatDataSourceStats_0Bto100KB_OneMinute_Max{job=\"processing/trino\"}",
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-io_trino_plugin",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "trino_plugin_hive_FileFormatDataSourceStats_0Bto100KB_OneMinute_Max{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-plugin",
+          "range": true,
+          "refId": "B"
+        }
+      ],
+      "title": "The maximum read time from 0B to 100KB.",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ms"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 16,
+        "y": 129
+      },
+      "id": 201,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "io_trino_plugin_hive_FileFormatDataSourceStats_100KBto1MB_OneMinute_Max{job=\"processing/trino\"}",
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-io_trino_plugin",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_ALIYUN-MIMIR}"
+          },
+          "editorMode": "code",
+          "expr": "trino_plugin_hive_FileFormatDataSourceStats_100KBto1MB_OneMinute_Max{job=\"processing/trino\"}",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{kubernetes_pod_name}}-{{name}}-plugin",
+          "range": true,
+          "refId": "B"
+        }
+      ],
+      "title": "The maximum read time from 100KB to 1MB.",
+      "type": "timeseries"
+    }
+  ],
+  "preload": false,
+  "refresh": "",
+  "schemaVersion": 40,
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Trino",
+  "uid": "cf8d07b2-404b-4658asdasdsdqas",
+  "version": 2,
+  "weekStart": ""
+}

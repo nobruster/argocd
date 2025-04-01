@@ -1,0 +1,38 @@
+{
+  "schemaName": "orderstatus",
+  "enableColumnBasedNullHandling": false,
+  "dimensionFieldSpecs": [
+    {
+      "name": "status_id",
+      "dataType": "INT",
+      "fieldType": "DIMENSION",
+      "notNull": false
+    },
+    {
+      "name": "order_identifier",
+      "dataType": "INT",
+      "fieldType": "DIMENSION",
+      "notNull": false
+    },
+    {
+      "name": "status",
+      "dataType": "STRING",
+      "fieldType": "DIMENSION",
+      "notNull": false
+    }
+  ],
+  "dateTimeFieldSpecs": [
+    {
+      "name": "status_timestamp",
+      "dataType": "TIMESTAMP",
+      "format": "1:MILLISECONDS:EPOCH",
+      "granularity": "1:MILLISECONDS"
+    },
+    {
+      "name": "dt_current_timestamp",
+      "dataType": "TIMESTAMP",
+      "format": "1:MILLISECONDS:EPOCH",
+      "granularity": "1:MILLISECONDS"
+    }
+  ]
+}
